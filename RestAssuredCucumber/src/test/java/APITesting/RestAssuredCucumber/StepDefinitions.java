@@ -63,7 +63,8 @@ public class StepDefinitions extends Posts {
 	public void parameters(DataTable arg1) throws Throwable {
 
 		java.util.List<java.util.List<String>> data = arg1.raw();
-		request = given()
+		request = 
+				given()
 					.param(data.get(0).get(0), data.get(0).get(1))
 					.param(data.get(1).get(0), data.get(1).get(1));
 	}
@@ -78,10 +79,11 @@ public class StepDefinitions extends Posts {
 		newPost.setTitle(data.get(1).get(1));
 		newPost.setAuthor(data.get(2).get(1));
 
-		request = 	given()
-					.when()
-						.body(newPost)
-						.contentType(ContentType.JSON);
+		request = 
+				given()
+				.when()
+					.body(newPost)
+					.contentType(ContentType.JSON);
 	}
 	
 	@When("^I want to (?:patch|put) with data$")
@@ -93,10 +95,11 @@ public class StepDefinitions extends Posts {
 		newPost.setTitle(data.get(0).get(1));
 		newPost.setAuthor(data.get(1).get(1));
 		
-		request = 	given()
-					.when()
-						.body(newPost)
-						.contentType(ContentType.JSON);
+		request = 
+				given()
+				.when()
+					.body(newPost)
+					.contentType(ContentType.JSON);
 		
 	}
 
@@ -105,11 +108,12 @@ public class StepDefinitions extends Posts {
 
 		response = request.get(URL);
 		System.out.println(response.asString());
-		String weatherDescription = response
-										.then()
-											.contentType(ContentType.JSON)
-											.extract()
-											.path("weather[0].description");
+		String weatherDescription = 
+				response
+					.then()
+						.contentType(ContentType.JSON)
+						.extract()
+						.path("weather[0].description");
 		
 		Assert.assertEquals(arg1, weatherDescription);
 
@@ -129,11 +133,12 @@ public class StepDefinitions extends Posts {
 		 */
 
 		response = request.get(URL);
-		String actualValue = response
-								.then()
-									.contentType(ContentType.JSON)
-									.extract()
-									.path(arg1);
+		String actualValue = 
+				response
+					.then()
+						.contentType(ContentType.JSON)
+						.extract()
+						.path(arg1);
 		
 		System.out.println(actualValue);
 		Assert.assertEquals(arg2, actualValue);

@@ -9,7 +9,7 @@ Scenario: Get Weather Response by City
 		| q | London | 
 		| appid | a4dcb7fbc11efc9b1cefe7badc619f54 |
 		
-	Then the weather description is "scattered clouds" 
+	Then the weather description is "light intensity drizzle rain" 
 	And the status code is "200" 
 	
 Scenario Outline: Get JSON Body Key and Values 
@@ -24,7 +24,7 @@ Scenario Outline: Get JSON Body Key and Values
 	Examples: 
 		| key | value |
 		| name | London |
-		|weather[0].description| scattered clouds |
+		|weather[0].description| light intensity drizzle rain |
 		
 		
 Scenario: Post Data to JSON Server 
@@ -33,7 +33,7 @@ Scenario: Post Data to JSON Server
 	When I make a request to "/posts" 
 	And I want to make a post with data 
 	
-		| id | 101 |
+		| id | 102 |
 		| title | Wealth of Nations |
 		| author | Adam Smith | 
 		
@@ -52,7 +52,7 @@ Scenario: Put Data to JSON Server
 	Then I make the put 
 	And the status code is "200" 
 	
-Scenario: Put Data to JSON Server 
+Scenario: Patch Data to JSON Server 
 	Given the endpoint "http://localhost:3000" is up 
 	When I make a request to "/posts" 
 	And I want to patch data on id "/1" 
