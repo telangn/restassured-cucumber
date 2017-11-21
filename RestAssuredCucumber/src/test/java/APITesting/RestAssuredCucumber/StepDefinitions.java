@@ -4,6 +4,7 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
 
+import SupportClasses.Info;
 import SupportClasses.Posts;
 
 import static com.jayway.restassured.RestAssured.*;
@@ -18,7 +19,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.Assert;
 
-public class StepDefinitions extends Posts {
+public class StepDefinitions {
 
 	/**
 	 * given() 
@@ -34,8 +35,6 @@ public class StepDefinitions extends Posts {
 	public ValidatableResponse json;
 
 	public String URL;
-
-	
 
 	@Given("^the endpoint \"([^\"]*)\" is up$")
 	public void endPointUp(String arg1) throws Throwable {
@@ -74,10 +73,16 @@ public class StepDefinitions extends Posts {
 		
 		java.util.List<java.util.List<String>> data = arg1.raw();
 		
+		Info info = new Info();
+		info.setPublisher(data.get(3).get(1));
+		info.setIsbn(data.get(4).get(1));
+		info.setCatalogNumber(data.get(5).get(1));
+		
 		Posts newPost = new Posts();
 		newPost.setId(data.get(0).get(1));
 		newPost.setTitle(data.get(1).get(1));
 		newPost.setAuthor(data.get(2).get(1));
+		newPost.setInfo(new Info[] {info});
 
 		request = 
 				given()
@@ -166,7 +171,9 @@ public class StepDefinitions extends Posts {
 	@Then("^I make the delete$")
 	public void delete() throws Throwable {
 		
-		response = request.delete(URL);
+		response = 	given()
+					.when()
+						.delete(URL);
 	}
 
 }
