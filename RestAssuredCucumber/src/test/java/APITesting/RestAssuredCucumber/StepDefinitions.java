@@ -8,12 +8,15 @@ import SupportClasses.Info;
 import SupportClasses.Posts;
 
 import static com.jayway.restassured.RestAssured.*;
+
+import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
 
 import static org.hamcrest.Matchers.*;
 
 import cucumber.api.DataTable;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -30,8 +33,18 @@ public class StepDefinitions {
 	public Response response;
 	public RequestSpecification request;
 	public ValidatableResponse json;
-
 	public String URL;
+	
+	/*
+	 * @Before 
+	 * public static void init() { 
+	 * 
+	 * RestAssured.baseURI = "http://localhost";
+	 * RestAssured.port = 3000; 
+	 * RestAssured.basePath = "/posts"; 
+	 * 
+	 * }
+	 */
 
 	@Given("^the endpoint \"([^\"]*)\" is up$")
 	public void endPointUp(String arg1) throws Throwable {
