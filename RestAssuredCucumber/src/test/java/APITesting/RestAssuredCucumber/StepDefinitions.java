@@ -3,48 +3,64 @@ package APITesting.RestAssuredCucumber;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
-
-import SupportClasses.Info;
-import SupportClasses.Posts;
-
 import static com.jayway.restassured.RestAssured.*;
-
-import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
-import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
 
+import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.*;
+import junit.framework.Assert;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.hamcrest.CoreMatchers;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
+
+import SupportClasses.Info;
+import SupportClasses.Posts;
 
 public class StepDefinitions {
 
 	/**
-	 * given() set cookies, add authorization, add parameters, setting header info
-	 * when() GET, POST, PUT, DELETE..etc 
-	 * then() validate status code, extract, response, extract headers, cookies, body
+	 * given() 
+	 * set cookies, add authorization, add parameters, setting header info
+	 * when() 
+	 * GET, POST, PUT, DELETE..etc 
+	 * then() 
+	 * validate status code, extract, response, extract headers, cookies, body
 	 */
 
 	public Response response;
 	public RequestSpecification request;
 	public ValidatableResponse json;
 	public String URL;
-	
+	public List<String> info = null;
+	public int sizeOfData;
+	public String member;
+	public int value;
+
 	/*
 	 * @Before 
-	 * public static void init() { 
+	 * public static void init() {
 	 * 
-	 * RestAssured.baseURI = "http://localhost";
-	 * RestAssured.port = 3000; 
-	 * RestAssured.basePath = "/posts"; 
+	 * RestAssured.baseURI = "http://localhost"; 
+	 * RestAssured.port = 3000;
+	 * RestAssured.basePath = "/posts";
 	 * 
 	 * }
 	 */
+
+	// ====================== GIVEN ==================================
 
 	@Given("^the endpoint \"([^\"]*)\" is up$")
 	public void endPointUp(String arg1) throws Throwable {
@@ -56,12 +72,14 @@ public class StepDefinitions {
 		Assert.assertEquals(200, response.getStatusCode());
 	}
 
+	// ====================== WHEN ===================================
+
 	@When("^I make a request to \"([^\"]*)\"$")
 	public void requestURL(String arg1) throws Throwable {
 		URL = URL + arg1;
 	}
 
-	@When("^I want to (?:patch|put|delete) data on id \"([^\"]*)\"$")
+	@When("^I want to (?:get|patch|put|delete) data on id \"([^\"]*)\"$")
 	public void updateOnEndPoint(String arg1) throws Throwable {
 		URL = URL + arg1;
 	}
@@ -108,14 +126,34 @@ public class StepDefinitions {
 
 	}
 
+	@When("^I save data at key \"([^\"]*)\"$")
+	public void saveDataAtPath(String arg1) throws Throwable {
+
+		info = given().when().get(URL).then().extract().path(arg1);
+
+	}
+
+	@When("^I want to get data on member \"([^\"]*)\"$")
+	public void Member(String arg1) throws Throwable {
+		member = arg1;
+	}
+
+	@When("^I search all keys with name \"([^\"]*)\" for value \"([^\"]*)\"$")
+	public void searchKeysForValue(String arg1, String arg2) throws Throwable {
+		info = given().when().get(URL).then().extract().path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}");
+		assertThat(info.isEmpty(), is(false));
+
+		// assertThat((Collection)info, is(not(empty())));
+	}
+
+	// ========================= THEN ========================================
+
 	@Then("^the weather description is \"([^\"]*)\"$")
 	public void weatherDescription(String arg1) throws Throwable {
 
 		response = request.get(URL);
 
-		String weatherDescription = response.then()
-				.contentType(ContentType.JSON)
-				.extract()
+		String weatherDescription = response.then().contentType(ContentType.JSON).extract()
 				.path("weather[0].description");
 
 		Assert.assertEquals(arg1, weatherDescription);
@@ -137,12 +175,31 @@ public class StepDefinitions {
 
 		response = request.get(URL);
 
-		String actualValue = response.then()
-				.contentType(ContentType.JSON)
-				.extract()
-				.path(arg1);
+		String actualValue = response.then().contentType(ContentType.JSON).extract().path(arg1);
 
 		Assert.assertEquals(arg2, actualValue);
+
+	}
+
+	@Then("^the data arrays are greater than (\\d+)$")
+	public void dataArraysGreaterThan(int arg1) throws Throwable {
+
+		/*
+		 * Using Rest-assured: sizeOfData =
+		 * given().when().get(URL).then().extract().path(arg1 +".size()");
+		 */
+
+		assertThat(info.size(), greaterThan(arg1));
+	}
+
+	@Then("^the \"([^\"]*)\" of my search is \"([^\"]*)\"$")
+	public void valueFromSearch(String arg1, String arg2) throws Throwable {
+		info = given().when().get(URL).then().extract()
+				.path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}." + arg1);
+
+		ArrayList<String> expectedValue = new ArrayList<String>();
+		expectedValue.add(arg2);
+		assertThat(info, CoreMatchers.hasItems(arg2));
 
 	}
 
