@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(format = { "pretty", "html:/home/ninad/eclipse-workspace/Reports/html/",
 		"json:/home/ninad/eclipse-workspace/Reports/cucumber-report.json" }, features = {
-				"src/test/resource" }, tags = { "@runfile" })
+				"src/test/resource" }, tags = { "@runfile, @runsecondfile, @runthirdfile" })
 public class RunnerTest {
 
 }

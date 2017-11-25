@@ -55,11 +55,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.btmatthews.hamcrest</groupId>
-			<artifactId>hamcrest-matchers</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>1.2.5</version>
