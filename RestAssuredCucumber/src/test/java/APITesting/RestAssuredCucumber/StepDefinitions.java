@@ -66,9 +66,7 @@ public class StepDefinitions {
 	public void endPointUp(String arg1) throws Throwable {
 
 		URL = arg1;
-
 		response = given().when().get(URL);
-
 		Assert.assertEquals(200, response.getStatusCode());
 	}
 
@@ -138,16 +136,13 @@ public class StepDefinitions {
 		member = arg1;
 	}
 
-<<<<<<< HEAD
+
 	@When("^there exists arrays for name \"([^\"]*)\" with value \"([^\"]*)\"$")
-=======
-	@When("^I search all keys with name \"([^\"]*)\" for value \"([^\"]*)\"$")
->>>>>>> 11d6144543e977dc8c186beaf7b4a49443402074
 	public void searchKeysForValue(String arg1, String arg2) throws Throwable {
 		info = given().when().get(URL).then().extract().path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}");
 		assertThat(info.isEmpty(), is(false));
 
-		// assertThat((Collection)info, is(not(empty())));
+		/* Using Hamcrest: assertThat((Collection)info, is(not(empty())));*/
 	}
 
 	// ========================= THEN ========================================
@@ -156,10 +151,8 @@ public class StepDefinitions {
 	public void weatherDescription(String arg1) throws Throwable {
 
 		response = request.get(URL);
-
 		String weatherDescription = response.then().contentType(ContentType.JSON).extract()
 				.path("weather[0].description");
-
 		Assert.assertEquals(arg1, weatherDescription);
 
 	}
@@ -173,14 +166,11 @@ public class StepDefinitions {
 	@Then("^the body contains the key \"([^\"]*)\" with value \"([^\"]*)\"$")
 	public void bodyContainsKeyAndValue(String arg1, String arg2) throws Throwable {
 
-		/*
-		 * Using Hamcrest: request.expect().body(arg1, equalTo(arg2)).when().get(URL);
-		 */
+		
+		/*  Using Hamcrest: request.expect().body(arg1, equalTo(arg2)).when().get(URL);*/		 
 
 		response = request.get(URL);
-
 		String actualValue = response.then().contentType(ContentType.JSON).extract().path(arg1);
-
 		Assert.assertEquals(arg2, actualValue);
 
 	}
@@ -188,41 +178,33 @@ public class StepDefinitions {
 	@Then("^the data arrays are greater than (\\d+)$")
 	public void dataArraysGreaterThan(int arg1) throws Throwable {
 
-		/*
-		 * Using Rest-assured: sizeOfData =
-		 * given().when().get(URL).then().extract().path(arg1 +".size()");
-		 */
+		/* Using Rest-assured: sizeOfData = given().when().get(URL).then().extract().path(arg1 +".size()");*/		 
 
 		assertThat(info.size(), greaterThan(arg1));
 	}
 
-<<<<<<< HEAD
+
 	@Then("^there exists key \"([^\"]*)\" with value \"([^\"]*)\"$")
-=======
-	@Then("^the \"([^\"]*)\" of my search is \"([^\"]*)\"$")
->>>>>>> 11d6144543e977dc8c186beaf7b4a49443402074
 	public void valueFromSearch(String arg1, String arg2) throws Throwable {
+		
 		info = given().when().get(URL).then().extract()
 				.path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}." + arg1);
 
 		ArrayList<String> expectedValue = new ArrayList<String>();
 		expectedValue.add(arg2);
 		assertThat(info, CoreMatchers.hasItems(arg2));
-
 	}
-<<<<<<< HEAD
+
 	
 	@Then("^there exists an array of \"([^\"]*)\" whose \"([^\"]*)\" is greater than \"([^\"]*)\"$")
 	public void arrayWithKeyGreaterThan(String arg1, String arg2, String arg3) throws Throwable {
-		info = given().when().get(URL).then().extract()
-				.path(member + ".findAll{it." + arg2 + ">'" + arg3 + "'}." + arg1);
 		
+		info = given().when().get(URL).then().extract()
+				.path(member + ".findAll{it." + arg2 + ">'" + arg3 + "'}." + arg1);		
 		assertThat(info.isEmpty(), is(false));
 	}
 	
-=======
 
->>>>>>> 11d6144543e977dc8c186beaf7b4a49443402074
 	@Then("^I make the post$")
 	public void post() throws Throwable {
 
