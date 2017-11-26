@@ -13,6 +13,7 @@ Scenario: Search through all arrays for specific key and value
 	When I make a request to "/posts" 
 	And I want to get data on id "/100" 
 	And I want to get data on member "info"
-	And I search all keys with name "publisher" for value "DC"
-	Then the "catalogNumber" of my search is "3"
+	And there exists arrays for name "publisher" with value "DC"
+	Then there exists key "catalogNumber" with value "3"
+	And there exists an array of "publisher" whose "catalogNumber" is greater than "3"
 	

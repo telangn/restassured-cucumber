@@ -138,7 +138,7 @@ public class StepDefinitions {
 		member = arg1;
 	}
 
-	@When("^I search all keys with name \"([^\"]*)\" for value \"([^\"]*)\"$")
+	@When("^there exists arrays for name \"([^\"]*)\" with value \"([^\"]*)\"$")
 	public void searchKeysForValue(String arg1, String arg2) throws Throwable {
 		info = given().when().get(URL).then().extract().path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}");
 		assertThat(info.isEmpty(), is(false));
@@ -192,7 +192,7 @@ public class StepDefinitions {
 		assertThat(info.size(), greaterThan(arg1));
 	}
 
-	@Then("^the \"([^\"]*)\" of my search is \"([^\"]*)\"$")
+	@Then("^there exists key \"([^\"]*)\" with value \"([^\"]*)\"$")
 	public void valueFromSearch(String arg1, String arg2) throws Throwable {
 		info = given().when().get(URL).then().extract()
 				.path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}." + arg1);
@@ -202,7 +202,15 @@ public class StepDefinitions {
 		assertThat(info, CoreMatchers.hasItems(arg2));
 
 	}
-
+	
+	@Then("^there exists an array of \"([^\"]*)\" whose \"([^\"]*)\" is greater than \"([^\"]*)\"$")
+	public void arrayWithKeyGreaterThan(String arg1, String arg2, String arg3) throws Throwable {
+		info = given().when().get(URL).then().extract()
+				.path(member + ".findAll{it." + arg2 + ">'" + arg3 + "'}." + arg1);
+		
+		assertThat(info.isEmpty(), is(false));
+	}
+	
 	@Then("^I make the post$")
 	public void post() throws Throwable {
 
