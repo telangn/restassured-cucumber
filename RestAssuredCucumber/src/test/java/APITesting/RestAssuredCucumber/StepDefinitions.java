@@ -3,6 +3,8 @@ package APITesting.RestAssuredCucumber;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
+import com.jayway.restassured.specification.ResponseSpecification;
+
 import static com.jayway.restassured.RestAssured.*;
 
 import com.jayway.restassured.builder.RequestSpecBuilder;
@@ -34,7 +36,8 @@ import SupportClasses.Posts;
 
 public class StepDefinitions {
 
-	/**
+	/* Notes:
+	 * 
 	 * given() 
 	 * set cookies, add authorization, add parameters, setting header info
 	 * when() 
@@ -44,6 +47,7 @@ public class StepDefinitions {
 	 */
 
 	public Response response;
+	public ResponseSpecification responseSpec;
 	public RequestSpecification request;
 	public RequestSpecBuilder requestBuilder;
 	public ResponseSpecBuilder responseBuilder;
@@ -54,7 +58,8 @@ public class StepDefinitions {
 	public String member;
 	public int value;
 
-	/*
+	/* Need to Re-factor with this in mind:
+	 * 
 	 * @Before 
 	 * public static void init() {
 	 * 
@@ -69,8 +74,8 @@ public class StepDefinitions {
 	 * 
 	 * responseBuilder = new ResponseSpecBuilder();
 	 * Assert (expect) values with responseBuilder
-	 * response = responseBuilder.build();
-	 * pass "response" in as - given().spec().when().get().then().spec(response);
+	 * responseSpec = responseBuilder.build();
+	 * pass "responseSpec" in as - given().spec().when().get().then().spec(responseSpec).body();
 	 * 
 	 * }
 	 */
