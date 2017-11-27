@@ -4,6 +4,9 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
 import static com.jayway.restassured.RestAssured.*;
+
+import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.http.ContentType;
 
 import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
@@ -42,6 +45,8 @@ public class StepDefinitions {
 
 	public Response response;
 	public RequestSpecification request;
+	public RequestSpecBuilder requestBuilder;
+	public ResponseSpecBuilder responseBuilder;
 	public ValidatableResponse json;
 	public String URL;
 	public List<String> info = null;
@@ -56,6 +61,16 @@ public class StepDefinitions {
 	 * RestAssured.baseURI = "http://localhost"; 
 	 * RestAssured.port = 3000;
 	 * RestAssured.basePath = "/posts";
+	 * 
+	 * requestBuilder = new RequestSpecBuilder();
+	 * Add parameters, headers, etc. with "requestBuilder"
+	 * request = requestBuilder.build();
+	 * pass "request" in as - given().spec(request).when().get();
+	 * 
+	 * responseBuilder = new ResponseSpecBuilder();
+	 * Assert (expect) values with responseBuilder
+	 * response = responseBuilder.build();
+	 * pass "response" in as - given().spec().when().get().then().spec(response);
 	 * 
 	 * }
 	 */
@@ -142,7 +157,8 @@ public class StepDefinitions {
 		info = given().when().get(URL).then().extract().path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}");
 		assertThat(info.isEmpty(), is(false));
 
-		/* Using Hamcrest: assertThat((Collection)info, is(not(empty())));*/
+		/* Using Hamcrest: 
+		 * assertThat((Collection)info, is(not(empty())));*/
 	}
 
 	// ========================= THEN ========================================
@@ -167,7 +183,8 @@ public class StepDefinitions {
 	public void bodyContainsKeyAndValue(String arg1, String arg2) throws Throwable {
 
 		
-		/*  Using Hamcrest: request.expect().body(arg1, equalTo(arg2)).when().get(URL);*/		 
+		/*  Using Hamcrest: 
+		 * request.expect().body(arg1, equalTo(arg2)).when().get(URL);*/		 
 
 		response = request.get(URL);
 		String actualValue = response.then().contentType(ContentType.JSON).extract().path(arg1);
@@ -178,7 +195,8 @@ public class StepDefinitions {
 	@Then("^the data arrays are greater than (\\d+)$")
 	public void dataArraysGreaterThan(int arg1) throws Throwable {
 
-		/* Using Rest-assured: sizeOfData = given().when().get(URL).then().extract().path(arg1 +".size()");*/		 
+		/* Using Rest-assured: 
+		 * sizeOfData = given().when().get(URL).then().extract().path(arg1 +".size()");*/		 
 
 		assertThat(info.size(), greaterThan(arg1));
 	}
