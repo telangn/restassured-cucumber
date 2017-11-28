@@ -66,6 +66,10 @@ public class StepDefinitions {
 	 * RestAssured.baseURI = "http://localhost"; 
 	 * RestAssured.port = 3000;
 	 * RestAssured.basePath = "/posts";
+	 * pass in as - RestAssured.given();
+	 * 
+	 * RestAssured.rootPath = "";
+	 * set it instead of using - given().when().then().root()
 	 * 
 	 * requestBuilder = new RequestSpecBuilder();
 	 * Add parameters, headers, etc. with "requestBuilder"
