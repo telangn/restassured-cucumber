@@ -4,33 +4,21 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.jayway.restassured.specification.ResponseSpecification;
-
 import static com.jayway.restassured.RestAssured.*;
-
 import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.builder.ResponseSpecBuilder;
 import com.jayway.restassured.http.ContentType;
-
-import static com.jayway.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.*;
 import junit.framework.Assert;
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
 import org.hamcrest.CoreMatchers;
-
 import cucumber.api.DataTable;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 import SupportClasses.Info;
 import SupportClasses.Posts;
 
