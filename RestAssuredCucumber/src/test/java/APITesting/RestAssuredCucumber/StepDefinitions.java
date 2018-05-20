@@ -22,6 +22,7 @@ import cucumber.api.java.en.When;
 import SupportClasses.Info;
 import SupportClasses.Posts;
 
+@SuppressWarnings("deprecation")
 public class StepDefinitions {
 
 	/* Notes:
