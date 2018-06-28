@@ -1,4 +1,4 @@
-package APITesting.RestAssuredCucumber;
+package stepDefinitions;
 
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
