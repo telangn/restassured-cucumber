@@ -2,12 +2,12 @@ package SupportClasses;
 
 
 
-public class Posts {
+public class Book {
 
 	private String id;
 	private String title;
 	private String author;
-	private Info[] info;
+	private Catalog[] info;
 
 	public String getId() {
 
@@ -39,11 +39,11 @@ public class Posts {
 		this.author = author;
 	}
 
-	public Info[] getInfo() {
+	public Catalog[] getInfo() {
 		return info;
 	}
 
-	public void setInfo(Info[] info) {
+	public void setInfo(Catalog[] info) {
 		this.info = info;
 	}
 

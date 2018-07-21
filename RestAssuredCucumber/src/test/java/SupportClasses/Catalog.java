@@ -1,6 +1,6 @@
 package SupportClasses;
 
-public class Info {
+public class Catalog {
 
 	private String isbn;
 	private String publisher;

@@ -19,8 +19,8 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import SupportClasses.Info;
-import SupportClasses.Posts;
+import SupportClasses.Catalog;
+import SupportClasses.Book;
 
 @SuppressWarnings("deprecation")
 public class StepDefinitions {
@@ -106,27 +106,27 @@ public class StepDefinitions {
 	public void postWithData(DataTable arg1) throws Throwable {
 		java.util.List<java.util.List<String>> data = arg1.raw();
 		
-		Info info = new Info();
-		info.setPublisher(data.get(3).get(1));
-		info.setIsbn(data.get(4).get(1));
-		info.setCatalogNumber(data.get(5).get(1));
+		Catalog catalog = new Catalog();
+		catalog.setPublisher(data.get(3).get(1));
+		catalog.setIsbn(data.get(4).get(1));
+		catalog.setCatalogNumber(data.get(5).get(1));
 		
-		Posts newPost = new Posts();
-		newPost.setId(data.get(0).get(1));
-		newPost.setTitle(data.get(1).get(1));
-		newPost.setAuthor(data.get(2).get(1));
-		newPost.setInfo(new Info[] { info });
+		Book book = new Book();
+		book.setId(data.get(0).get(1));
+		book.setTitle(data.get(1).get(1));
+		book.setAuthor(data.get(2).get(1));
+		book.setInfo(new Catalog[] { catalog });
 		
-		request = given().when().body(newPost).contentType(ContentType.JSON);
+		request = given().when().body(book).contentType(ContentType.JSON);
 	}
 
 	@When("^I want to (?:patch|put) with data$")
 	public void putWithData(DataTable arg1) throws Throwable {
 		java.util.List<java.util.List<String>> data = arg1.raw();
-		Posts newPost = new Posts();
-		newPost.setTitle(data.get(0).get(1));
-		newPost.setAuthor(data.get(1).get(1));
-		request = given().when().body(newPost).contentType(ContentType.JSON);
+		Book book = new Book();
+		book.setTitle(data.get(0).get(1));
+		book.setAuthor(data.get(1).get(1));
+		request = given().when().body(book).contentType(ContentType.JSON);
 	}
 
 	@When("^I save data at key \"([^\"]*)\"$")
