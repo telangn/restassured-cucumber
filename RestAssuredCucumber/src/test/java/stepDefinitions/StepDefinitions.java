@@ -115,7 +115,7 @@ public class StepDefinitions {
 		book.setId(data.get(0).get(1));
 		book.setTitle(data.get(1).get(1));
 		book.setAuthor(data.get(2).get(1));
-		book.setInfo(new Catalog[] { catalog });
+		book.setCatalog(new Catalog[] { catalog });
 		
 		request = given().when().body(book).contentType(ContentType.JSON);
 	}

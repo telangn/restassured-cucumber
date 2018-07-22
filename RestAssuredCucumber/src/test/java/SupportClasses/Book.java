@@ -7,7 +7,7 @@ public class Book {
 	private String id;
 	private String title;
 	private String author;
-	private Catalog[] info;
+	private Catalog[] catalog;
 
 	public String getId() {
 
@@ -39,12 +39,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public Catalog[] getInfo() {
-		return info;
+	public Catalog[] getCatalog() {
+		return catalog;
 	}
 
-	public void setInfo(Catalog[] info) {
-		this.info = info;
+	public void setCatalog(Catalog[] catalog) {
+		this.catalog = catalog;
 	}
 
 }
