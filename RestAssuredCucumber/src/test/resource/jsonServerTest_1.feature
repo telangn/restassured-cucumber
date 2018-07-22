@@ -4,14 +4,14 @@ Feature: Testing REST APIs on JSON Server
 Scenario: POST Data to JSON Server 
 
 	Given the endpoint "http://localhost:3000" is up 
-	When I make a request to "/posts" 
+	When I make a request to "/Books" 
 	And I want to make a post with data 
 	
-		| id | 103 |
+		| id | 105 |
 		| title | The Outsiders |
 		| author | S.E. Hinton | 
 		| publisher | Viking Press |
-		| isbn | 404 |
+		| isbn | 304 |
 		| catalog no. | 5 |
 		
 	Then I make the post 
@@ -19,8 +19,8 @@ Scenario: POST Data to JSON Server
 	
 Scenario: PUT Data to JSON Server 
 	Given the endpoint "http://localhost:3000" is up 
-	When I make a request to "/posts" 
-	And I want to put data on id "/102" 
+	When I make a request to "/Books" 
+	And I want to put data on id "/101" 
 	And I want to put with data 
 	
 		| title | To Kill a Mockingbird | 
@@ -31,8 +31,8 @@ Scenario: PUT Data to JSON Server
 	
 Scenario: PATCH Data to JSON Server 
 	Given the endpoint "http://localhost:3000" is up 
-	When I make a request to "/posts" 
-	And I want to patch data on id "/1" 
+	When I make a request to "/Books" 
+	And I want to patch data on id "/103" 
 	And I want to patch with data 
 	
 		| title | Manufacturing Consent | 
@@ -43,8 +43,8 @@ Scenario: PATCH Data to JSON Server
 	
 Scenario: DELETE Data on JSON Server 
 	Given the endpoint "http://localhost:3000" is up 
-	When I make a request to "/posts" 
-	And I want to delete data on id "/100" 
+	When I make a request to "/Books" 
+	And I want to delete data on id "/02" 
 	Then I make the delete 
 	And the status code is "200"
 	

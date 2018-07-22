@@ -9,7 +9,7 @@ Scenario: GET Weather Response by City
 		| q | London | 
 		| appid | a4dcb7fbc11efc9b1cefe7badc619f54 |
 		
-	Then the weather description is "light intensity drizzle rain" 
+	Then the weather description is "mist" 
 	And the status code is "200" 
 	
 Scenario Outline: GET JSON Body Key and Values 
@@ -24,4 +24,4 @@ Scenario Outline: GET JSON Body Key and Values
 	Examples: 
 		| key | value |
 		| name | London |
-		|weather[0].description| light intensity drizzle rain |
+		|weather[0].description| mist |
