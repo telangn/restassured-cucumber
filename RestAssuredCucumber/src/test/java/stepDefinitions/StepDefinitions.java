@@ -22,7 +22,7 @@ import SupportClasses.Catalog;
 import SupportClasses.Book;
 
 @SuppressWarnings("deprecation")
-public class StepDefinitions  {
+public class StepDefinitions {
 
 	/* Notes:
 	 * given() 
@@ -49,16 +49,10 @@ public class StepDefinitions  {
 	 * RestAssured.rootPath = "";
 	 * set it instead of using - given().when().then().root()
 	 * 
-	 * requestBuilder = new RequestSpecBuilder();
-	 * Add parameters, headers, etc. with "requestBuilder"
-	 * request = requestBuilder.build();
-	 * pass "request" in as - given().spec(request).when().get();
-	 * 
 	 * responseBuilder = new ResponseSpecBuilder();
 	 * Assert (expect) values with responseBuilder
 	 * responseSpec = responseBuilder.build();
 	 * pass "responseSpec" in as - given().spec().when().get().then().spec(responseSpec).body();
-	
 	 */
 
 	@Given("^the endpoint is up$")
@@ -115,7 +109,6 @@ public class StepDefinitions  {
 
 	@When("^I save data at key \"([^\"]*)\"$")
 	public void saveDataAtPath(String arg1) throws Throwable {
-		
 		value = VResponse.extract().path(arg1);
 	}
 
@@ -154,7 +147,6 @@ public class StepDefinitions  {
 	public void valueFromSearch(String arg1, String arg2) throws Throwable {
 		
 		value = VResponse.extract().path(member + ".findAll{it." + arg1 + "=='" + arg2 + "'}." + arg1);
-
 		assertThat(value, CoreMatchers.hasItems(arg2));
 	}
 
