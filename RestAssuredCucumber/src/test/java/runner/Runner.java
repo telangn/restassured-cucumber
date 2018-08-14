@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(format = { "pretty", "html:/home/ninad/eclipse-workspace/Reports/html/",
 		"json:/home/ninad/eclipse-workspace/Reports/cucumber-report.json" }, features = {
-				"src/test/resource" }, glue = "stepDefinitions", tags = { "@jsonServer2" })
+				"src/test/resource" }, glue = {"stepDefinitions"}, tags = { "@jsonServer2" })
 public class Runner {
 
 }
