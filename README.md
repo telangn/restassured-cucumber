@@ -5,10 +5,12 @@ This is a Cucumber - Rest-Assured Framework
 ## Getting Started
 
 ```
-git clone https://github.com/telangn/cucumber-selenium.git
+git clone https://github.com/telangn/restassured-cucumber.git
 ```
 
 ### Prerequisites
+
+Resources to test with:
 
 * [JSON-Server](https://github.com/typicode/json-server)
 ```
