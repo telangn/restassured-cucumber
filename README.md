@@ -17,7 +17,7 @@ Resources to test with:
 npm install -g json-server
 ```
 
-* An account with OpenWeatherMap for exposed APIs
+* An account with OpenWeatherMap for exposed APIs:
 https://openweathermap.org/api
 
 ### Installing
